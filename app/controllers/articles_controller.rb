@@ -17,7 +17,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    debugger
+    
     @article = Article.new(article_params) #article params, use for submitting the right value and it's a method !
     @article.user = User.first
     if @article.save
