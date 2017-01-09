@@ -1,5 +1,8 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:edit, :update, :show, :destroy] #call b4 action that contains @article = Article.find(params[:id])
+  #restriction action
+  before_action :require_user, except: [:index, :show]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def index
     #grab all article in database
@@ -56,6 +59,13 @@ class ArticlesController < ApplicationController
 
     def article_params
       params.require(:article).permit(:title, :description) #it use article model to do the action such as validation..refer back at article model!
+    end
+
+    def require_same_user
+      if current_user != @article.user
+        flash[:danger] = "Forbidden!! You can only edit or delete your own articles!"
+        redirect_to articles_path
+      end
     end
 
 end
