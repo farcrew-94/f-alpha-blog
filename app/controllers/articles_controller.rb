@@ -1,10 +1,10 @@
 class ArticlesController < ApplicationController
-
   before_action :set_article, only: [:edit, :update, :show, :destroy] #call b4 action that contains @article = Article.find(params[:id])
 
   def index
     #grab all article in database
-    @articles = Article.all
+    #but using pagination...how much per page...to reduce an instance varible get too much to handle all data
+    @articles = Article.paginate(page: params[:page], per_page: 5)
   end
 
   #define new.html.erb
