@@ -58,7 +58,8 @@ class ArticlesController < ApplicationController
     end
 
     def article_params
-      params.require(:article).permit(:title, :description) #it use article model to do the action such as validation..refer back at article model!
+      params.require(:article).permit(:title, :description, category_ids: []) #it use article model to do the action such as validation..refer back at article model!
+      #category_ids is at arry form!
     end
 
     def require_same_user
