@@ -1,5 +1,7 @@
 class Article < ActiveRecord::Base
   belongs_to :user
+  has_many :article_categories
+  has_many :categories, through: :article_categories 
   # The validations
   #The attribute is needed and cannot be null and the length must be consider as follow
   validates :title, presence:true, length: {minimum: 3, maximum: 50}
